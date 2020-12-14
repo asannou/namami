@@ -1,0 +1,456 @@
+{
+  "jk1": {
+    "thread_id": 0,
+    "name": "NHK 総合",
+    "tags": ["NHK総合"]
+  },
+  "jk2": {
+    "thread_id": 1,
+    "name": "Eテレ",
+    "tags": ["NHK_Eテレ"]
+  },
+  "jk4": {
+    "thread_id": 2,
+    "name": "日本テレビ",
+    "tags": ["日本テレビ"]
+  },
+  "jk5": {
+    "thread_id": 3,
+    "name": "テレビ朝日",
+    "tags": ["テレビ朝日"]
+  },
+  "jk6": {
+    "thread_id": 4,
+    "name": "TBS テレビ",
+    "tags": ["TBSテレビ"]
+  },
+  "jk7": {
+    "thread_id": 5,
+    "name": "テレビ東京",
+    "tags": ["テレビ東京"]
+  },
+  "jk8": {
+    "thread_id": 6,
+    "name": "フジテレビ",
+    "tags": ["フジテレビ"]
+  },
+  "jk9": {
+    "thread_id": 7,
+    "name": "TOKYO MX",
+    "tags": ["TOKYO_MX"]
+  },
+  "jk10": {
+    "thread_id": 8,
+    "name": "テレ玉",
+    "tags": ["テレ玉"]
+  },
+  "jk11": {
+    "thread_id": 9,
+    "name": "tvk",
+    "tags": ["tvk"]
+  },
+  "jk12": {
+    "thread_id": 10,
+    "name": "チバテレビ",
+    "tags": ["チバテレビ"]
+  },
+  "jk594": {
+    "id": 1594,
+    "radiko_id": "r1",
+    "thread_id": 11,
+    "name": "NHKラジオ第1"
+  },
+  "jk693": {
+    "id": 1693,
+    "radiko_id": "r2",
+    "thread_id": 12,
+    "name": "NHKラジオ第2"
+  },
+  "jk825": {
+    "id": 1825,
+    "radiko_id": "fm",
+    "thread_id": 13,
+    "name": "NHK-FM"
+  },
+  "jk792": {
+    "id": 10792,
+    "radiko_id": "AIR-G",
+    "thread_id": 14,
+    "name": "AIR-G'"
+  },
+  "jk1287": {
+    "id": 11287,
+    "radiko_id": "HBC",
+    "thread_id": 15,
+    "name": "HBCラジオ"
+  },
+  "jk1440": {
+    "id": 11440,
+    "radiko_id": "STV",
+    "thread_id": 16,
+    "name": "STVラジオ"
+  },
+  "jk3925": {
+    "id": 13925,
+    "radiko_id": "NSB",
+    "thread_id": 17,
+    "name": "ラジオNIKKEI第1放送"
+  },
+  "jk761": {
+    "id": 80761,
+    "radiko_id": "INT",
+    "thread_id": 18,
+    "name": "Inter FM"
+  },
+  "jk800": {
+    "id": 80800,
+    "radiko_id": "FMT",
+    "thread_id": 19,
+    "name": "TOKYO FM"
+  },
+  "jk813": {
+    "id": 80813,
+    "radiko_id": "FMJ",
+    "thread_id": 20,
+    "name": "J-WAVE"
+  },
+  "jk954": {
+    "id": 80954,
+    "radiko_id": "TBS",
+    "thread_id": 21,
+    "name": "TBSラジオ"
+  },
+  "jk1134": {
+    "id": 81134,
+    "radiko_id": "QRR",
+    "thread_id": 22,
+    "name": "文化放送"
+  },
+  "jk1197": {
+    "id": 81197,
+    "radiko_id": "IBS",
+    "thread_id": 23,
+    "name": "茨城放送"
+  },
+  "jk1242": {
+    "id": 81242,
+    "radiko_id": "LFR",
+    "thread_id": 24,
+    "name": "ニッポン放送"
+  },
+  "jk764": {
+    "id": 90764,
+    "radiko_id": "RADIOBERRY",
+    "thread_id": 25,
+    "name": "RADIO BERRY"
+  },
+  "jk863": {
+    "id": 100863,
+    "radiko_id": "FMGUNMA",
+    "thread_id": 26,
+    "name": "FMぐんま"
+  },
+  "jk780": {
+    "id": 110780,
+    "radiko_id": "BAYFM78",
+    "thread_id": 27,
+    "name": "bayfm"
+  },
+  "jk795": {
+    "id": 110795,
+    "radiko_id": "NACK5",
+    "thread_id": 28,
+    "name": "NACK5"
+  },
+  "jk847": {
+    "id": 110847,
+    "radiko_id": "YFM",
+    "thread_id": 29,
+    "name": "FMヨコハマ"
+  },
+  "jk1422": {
+    "id": 111422,
+    "radiko_id": "JORF",
+    "thread_id": 30,
+    "name": "ラジオ日本"
+  },
+  "jk778": {
+    "id": 210778,
+    "radiko_id": "ZIP-FM",
+    "thread_id": 31,
+    "name": "ZIP-FM"
+  },
+  "jk807": {
+    "id": 210807,
+    "radiko_id": "FMAICHI",
+    "thread_id": 32,
+    "name": "FM AICHI"
+  },
+  "jk1053": {
+    "id": 211053,
+    "radiko_id": "CBC",
+    "thread_id": 33,
+    "name": "CBCラジオ"
+  },
+  "jk1053": {
+    "id": 211332,
+    "radiko_id": "TOKAIRADIO",
+    "thread_id": 34,
+    "name": "東海ラジオ"
+  },
+  "jk1431": {
+    "id": 211431,
+    "radiko_id": "GBS",
+    "thread_id": 35,
+    "name": "ぎふチャン"
+  },
+  "jk789": {
+    "id": 240789,
+    "radiko_id": "FMMIE",
+    "thread_id": 36,
+    "name": "radio CUBE FM三重"
+  },
+  "jk765": {
+    "id": 250765,
+    "radiko_id": "CCL",
+    "thread_id": 37,
+    "name": "FM COCOLO"
+  },
+  "jk802": {
+    "id": 250802,
+    "radiko_id": "802",
+    "thread_id": 38,
+    "name": "FM802"
+  },
+  "jk851": {
+    "id": 250851,
+    "radiko_id": "FMO",
+    "thread_id": 39,
+    "name": "FM OSAKA"
+  },
+  "jk899": {
+    "id": 250899,
+    "radiko_id": "KISSFMKOBE",
+    "thread_id": 40,
+    "name": "Kiss FM KOBE"
+  },
+  "jk1008": {
+    "id": 251008,
+    "radiko_id": "ABC",
+    "thread_id": 41,
+    "name": "朝日放送"
+  },
+  "jk1179": {
+    "id": 251179,
+    "radiko_id": "MBS",
+    "thread_id": 42,
+    "name": "毎日放送"
+  },
+  "jk1314": {
+    "id": 251314,
+    "radiko_id": "OBC",
+    "thread_id": 43,
+    "name": "ラジオ大阪"
+  },
+  "jk1143": {
+    "id": 261143,
+    "radiko_id": "KBS",
+    "thread_id": 44,
+    "name": "KBS京都"
+  },
+  "jk558": {
+    "id": 280558,
+    "radiko_id": "CRK",
+    "thread_id": 45,
+    "name": "ラジオ関西"
+  },
+  "jk1557": {
+    "id": 301557,
+    "radiko_id": "WBS",
+    "thread_id": 46,
+    "name": "和歌山放送"
+  },
+  "jk808": {
+    "id": 400808,
+    "radiko_id": "FMFUKUOKA",
+    "thread_id": 47,
+    "name": "FM FUKUOKA"
+  },
+  "jk827": {
+    "id": 400827,
+    "radiko_id": "LOVEFM",
+    "thread_id": 48,
+    "name": "Love FM"
+  },
+  "jk1278": {
+    "id": 401278,
+    "radiko_id": "RKB",
+    "thread_id": 49,
+    "name": "RKBラジオ"
+  },
+  "jk1413": {
+    "id": 401413,
+    "radiko_id": "KBC",
+    "thread_id": 50,
+    "name": "九州朝日放送"
+  },
+  "jk101": {
+    "thread_id": 51,
+    "bs": true,
+    "name": "NHKBS-1",
+    "tags": ["NHKBS-1"]
+  },
+  "jk103": {
+    "thread_id": 52,
+    "bs": true,
+    "name": "NHK BSプレミアム",
+    "tags": ["NHK_BSプレミアム", "NHKBSプレミアム"]
+  },
+  "jk141": {
+    "thread_id": 53,
+    "bs": true,
+    "name": "BS 日テレ",
+    "tags": ["BS_日テレ", "BS日テレ"]
+  },
+  "jk151": {
+    "thread_id": 54,
+    "bs": true,
+    "name": "BS 朝日",
+    "tags": ["BS_朝日", "BS朝日"]
+  },
+  "jk161": {
+    "thread_id": 55,
+    "bs": true,
+    "name": "BS-TBS",
+    "tags": ["BS-TBS"]
+  },
+  "jk171": {
+    "thread_id": 56,
+    "bs": true,
+    "name": "BSジャパン",
+    "tags": ["BSジャパン"]
+  },
+  "jk181": {
+    "thread_id": 57,
+    "bs": true,
+    "name": "BSフジ",
+    "tags": ["BSフジ"]
+  },
+  "jk191": {
+    "thread_id": 58,
+    "bs": true,
+    "name": "WOWOWプライム"
+  },
+  "jk192": {
+    "thread_id": 59,
+    "bs": true,
+    "name": "WOWOWライブ"
+  },
+  "jk193": {
+    "thread_id": 60,
+    "bs": true,
+    "name": "WOWOWシネマ"
+  },
+  "jk200": {
+    "thread_id": 61,
+    "bs": true,
+    "name": "スターチャンネル1"
+  },
+  "jk201": {
+    "thread_id": 62,
+    "bs": true,
+    "name": "スターチャンネル2"
+  },
+  "jk202": {
+    "thread_id": 63,
+    "bs": true,
+    "name": "スターチャンネル3"
+  },
+  "jk211": {
+    "thread_id": 64,
+    "bs": true,
+    "name": "BSイレブン",
+    "tags": ["BS11"]
+  },
+  "jk222": {
+    "thread_id": 65,
+    "bs": true,
+    "name": "TwellV",
+    "tags": ["TwellV"]
+  },
+  "jk231": {
+    "thread_id": 66,
+    "bs": true,
+    "name": "放送大学"
+  },
+  "jk234": {
+    "thread_id": 67,
+    "bs": true,
+    "name": "BSグリーンチャンネル"
+  },
+  "jk236": {
+    "thread_id": 68,
+    "bs": true,
+    "name": "BSアニマックス"
+  },
+  "jk238": {
+    "thread_id": 69,
+    "bs": true,
+    "name": "FOX bs 238"
+  },
+  "jk241": {
+    "thread_id": 70,
+    "bs": true,
+    "name": "BSスカパー!"
+  },
+  "jk242": {
+    "thread_id": 71,
+    "bs": true,
+    "name": "J Sports 1"
+  },
+  "jk243": {
+    "thread_id": 72,
+    "bs": true,
+    "name": "J Sports 2"
+  },
+  "jk244": {
+    "thread_id": 73,
+    "bs": true,
+    "name": "J Sports 3"
+  },
+  "jk245": {
+    "thread_id": 74,
+    "bs": true,
+    "name": "J Sports 4"
+  },
+  "jk251": {
+    "thread_id": 75,
+    "bs": true,
+    "name": "BS釣りビジョン"
+  },
+  "jk252": {
+    "thread_id": 76,
+    "bs": true,
+    "name": "IMAGICA BS"
+  },
+  "jk255": {
+    "thread_id": 77,
+    "bs": true,
+    "name": "BS日本映画専門チャンネル"
+  },
+  "jk256": {
+    "thread_id": 78,
+    "bs": true,
+    "name": "ディズニー・チャンネル"
+  },
+  "jk258": {
+    "thread_id": 79,
+    "bs": true,
+    "name": "Dlife"
+  },
+  "jk910": {
+    "thread_id": 80,
+    "bs": true,
+    "name": "SOLiVE24"
+  }
+}

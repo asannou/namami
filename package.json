@@ -1,0 +1,23 @@
+{
+  "name": "namami",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "ws": "^7.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asannou/namami.git"
+  },
+  "author": "asannou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asannou/namami/issues"
+  },
+  "homepage": "https://github.com/asannou/namami#readme"
+}
