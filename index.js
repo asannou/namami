@@ -264,7 +264,6 @@ function createHttpServer() {
 
 function handleGetApplicationVersion({ res }) {
   res.setHeader('Content-Type', 'application/xml; charset=UTF-8');
-  res.write('<channels status="ok">\n');
   res.write('<?xml version="1.0" encoding="UTF-8"?>\n');
   res.write('<application>\n');
   res.write('  <platform>windows</platform>\n');
