@@ -304,7 +304,7 @@
     "thread_id": 52,
     "bs": true,
     "name": "NHK BSプレミアム",
-    "tags": ["NHK_BSプレミアム", "NHKBSプレミアム"]
+    "tags": ["NHK_BSプレミアム", "NHKBSプレミアム", "BSプレミアム"]
   },
   "jk141": {
     "thread_id": 53,
@@ -322,13 +322,13 @@
     "thread_id": 55,
     "bs": true,
     "name": "BS-TBS",
-    "tags": ["BS-TBS"]
+    "tags": ["BS-TBS", "BSTBS"]
   },
   "jk171": {
     "thread_id": 56,
     "bs": true,
     "name": "BSジャパン",
-    "tags": ["BSジャパン"]
+    "tags": ["BSジャパン", "BSテレ東"]
   },
   "jk181": {
     "thread_id": 57,
