@@ -13,6 +13,7 @@ const { debug } = console;
 const port = 80;
 const ms_port = 2525;
 const ms_address = process.argv[2] ?? '127.0.0.1'
+const http_port = port;
 
 const lives = {};
 const threads = {};
@@ -226,9 +227,11 @@ function createHttpServer() {
       'v2': {
         'getchannels': handleGetChannels,
         'getflv': handleGetFlv,
-        'getpostkey': handleGetPostkey
+        'getpostkey': handleGetPostkey,
+        'getwaybackkey': handleGetWaybackkey
       },
-      'getpostkey': handleGetPostkey
+      'getpostkey': handleGetPostkey,
+      'thread': handleGetThread
     }
   }
   const server = http.createServer(async (req, res) => {
@@ -316,15 +319,18 @@ function getLastRes(thread) {
 function handleGetFlv({ url, res }) {
   const video = url.searchParams.get('v');
   const channel = channels[video];
+  const start_time = parseInt(url.searchParams.get('start_time'));
+  const thread = getThread(video, start_time || undefined);
   let params;
-  if (channel) {
-    const thread = getThread(video);
+  if (channel && thread) {
+    const archive = start_time ? { archive: 1 } : {};
     params = new URLSearchParams({
       done: 'true',
+      ...archive,
       thread_id: thread.id,
       ms: ms_address,
       ms_port: ms_port,
-      http_port: 8081,
+      http_port: http_port,
       channel_no: parseInt(video.substring(2)),
       channel_name: channel.name,
       genre_id: 1,
@@ -354,7 +360,12 @@ function handleGetFlv({ url, res }) {
 
 function handleGetPostkey({ res }) {
   res.setHeader('Content-Type', 'text/plain; charset=UTF-8');
-  res.write('postkey=unavailable');
+  res.write(`postkey=.${getServerTime()}.unavailable2525252525252525`);
+}
+
+function handleGetWaybackkey({ res }) {
+  res.setHeader('Content-Type', 'text/plain; charset=UTF-8');
+  res.write(`waybackkey=${getServerTime()}.unavailable2525252525252525`);
 }
 
 function handleSessionCreate({ res }) {
@@ -404,6 +415,15 @@ function handleNg({ res }) {
   res.write(`<nicovideo_ng_response status="ok">\n`);
   res.write(`  <count>0</count>\n`);
   res.write(`</nicovideo_ng_response>\n`);
+}
+
+function handleGetThread({ url, res }) {
+  const thread = url.searchParams.get('thread');
+  res.setHeader('Content-Type', 'text/xml');
+  res.write(`<?xml version="1.0" encoding="UTF-8"?>`);
+  res.write(`<packet>`);
+  res.write(`<thread resultcode="0" thread="${thread}" ticket="0x25252525" revision="1" server_time="${getServerTime()}"/>`);
+  res.write(`</packet>`);
 }
 
 function handleIndex({ paths, res }) {
@@ -456,7 +476,7 @@ async function handleWatch({ paths, res }) {
   res.write(`<body>`);
   res.write(`<ul>`);
   for (const live_video of thread.lives) {
-    if (!lives[live_video]) break;
+    if (!lives[live_video]) continue;
     const url = `https://live.nicovideo.jp/watch/${live_video}`;
     res.write(`<li>`);
     res.write(`<a target="_blank" href="${url}">${url}</a>`);
@@ -568,7 +588,7 @@ function writeThread(socket, thread) {
     ` thread="${thread.id}"` +
     ` last_res="${last_res}"` +
     ` ticket="${ticket}"` +
-    ` revision="4"` +
+    ` revision="1"` +
     ` server_time="${getServerTime()}"` +
     `/>`;
   socket.write(`${element}\0`);
@@ -606,7 +626,7 @@ function createThread(thread_id) {
     last_min_res: 0,
     recent_res: Array(recent_length),
     ticket: '0x25252525',
-    revision: 4,
+    revision: 1,
     base_time: base_time,
     open_time: base_time,
     start_time: base_time,
@@ -622,7 +642,7 @@ function createThread(thread_id) {
     thread.lives = prev_thread.lives;
     for (const live_video of thread.lives) {
       const live = lives[live_video];
-      if (!live) break;
+      if (!live) continue;
       live.stream.unpipe(prev_thread.stream).resume();
       debug('unpipe', live_video, prev_thread.id);
       live.stream.pipe(thread.stream);
@@ -633,10 +653,10 @@ function createThread(thread_id) {
   return thread;
 }
 
-function getThread(video) {
+function getThread(video, start_time) {
   const channel = channels[video];
   if (!channel) return;
-  const thread_id = getBaseTime() + channel.thread_id;
+  const thread_id = getBaseTime(start_time) + channel.thread_id;
   return threads[thread_id];
 }
 
@@ -816,7 +836,9 @@ async function pipeLives(tags, videos) {
 
 async function pipeLive(live_video, videos) {
   const { tags, stream } = await getLive(live_video);
-  const threads = videos ? videos.map(getThread) : tags.map(getThreadByTag);
+  const threads = videos ?
+    videos.map((video) => getThread(video)) :
+    tags.map((tag) => getThreadByTag(tag));
   for (const thread of threads.filter(Boolean)) {
     if (!isPiped(stream, thread.stream)) {
       stream.pipe(thread.stream);
