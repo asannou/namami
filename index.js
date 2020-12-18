@@ -289,6 +289,7 @@ function handleGetChannels({ res }) {
       channel.radiko_id ? 'radio_channel' : 'channel';
     const id = channel.id ?? parseInt(video.substring(2));
     const thread = getThread(video);
+    if (!thread) continue;
     const last_res = getLastRes(thread);
     res.write(`  <${tagname}>\n`);
     res.write(`    <id>${id}</id>\n`);
@@ -453,6 +454,7 @@ function handleIndex({ paths, res }) {
     const no = parseInt(video.substring(2));
     const channel = channels[video];
     const thread = getThread(video);
+    if (!thread) continue;
     const last_res = getLastRes(thread);
     res.write(`<tr>`);
     res.write(`<td>${no}ch</td>`);
@@ -803,12 +805,7 @@ function createThreads() {
 
 async function setPipesInterval() {
   const delay = 300;
-  const pipe = async () => {
-    await pipeLives(['ニコニコ実況']);
-    await pipeLives(['niconews24'], ['jk10']);
-    await pipeLives(['ウェザーニュースLiVE'], ['jk11']);
-    await pipeLives(['北朝鮮', '朝鮮中央テレビ'], ['jk12']);
-  };
+  const pipe = () => pipeLives(['ニコニコ実況']);
   await pipe();
   return setInterval(pipe, delay * 1000);
 }
