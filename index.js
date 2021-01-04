@@ -10,7 +10,7 @@ const WebSocket = require('ws');
 const channels = require('./channels.json');
 const { debug } = console;
 
-const port = 80;
+const port = process.argv[3] ?? 80;
 const ms_port = 2525;
 const ms_address = process.argv[2] ?? '127.0.0.1'
 const http_port = port;
@@ -25,7 +25,7 @@ function getServerTime() {
     const elapsed_time = getNow() - local_time;
     return Math.round(server_time + elapsed_time);
   } else {
-    return getNow();
+    return Math.round(getNow());
   }
 }
 
@@ -238,8 +238,8 @@ function createHttpServer() {
     const url = new URL(req.url, `http://${req.headers.host}`);
     const data = await slurpMessage(req);
     if (data) url.search = data;
-    debug('req', res.socket.remoteAddress, req.method, url.toString());
-    debug(req.headers, data);
+    //debug('req', res.socket.remoteAddress, req.method, url.toString());
+    //debug(req.headers, data);
     const paths = url.pathname.substring(1).split('/');
     const AsyncFunction = (async () => {}).constructor;
     let handler = handlers;
@@ -291,21 +291,21 @@ function handleGetChannels({ res }) {
     const thread = getThread(video);
     if (!thread) continue;
     const last_res = getLastRes(thread);
-    res.write(`  <${tagname}>\n`);
-    res.write(`    <id>${id}</id>\n`);
+    res.write(`<${tagname}>\n`);
+    res.write(`<id>${id}</id>\n`);
     if (channel.radiko_id) {
-      res.write(`    <radiko_id>${channel.radiko_id}</radiko_id>\n`);
+      res.write(`<radiko_id>${channel.radiko_id}</radiko_id>\n`);
     } else if (!channel.bs) {
-      res.write(`    <no>${id}</no>\n`);
+      res.write(`<no>${id}</no>\n`);
     }
-    res.write(`    <name>${channel.name}</name>\n`);
-    res.write(`    <video>${video}</video>\n`);
-    res.write(`    <thread>\n`);
-    res.write(`      <id>${thread.id}</id>\n`);
-    res.write(`      <last_res>${escapeChat(last_res)}</last_res>\n`);
-    res.write(`      <force>${thread.force}</force>\n`);
-    res.write(`    </thread>\n`);
-    res.write(`  </${tagname}>\n`);
+    res.write(`<name>${channel.name}</name>\n`);
+    res.write(`<video>${video}</video>\n`);
+    res.write(`<thread>\n`);
+    res.write(`<id>${thread.id}</id>\n`);
+    res.write(`<last_res>${escapeChat(last_res)}</last_res>\n`);
+    res.write(`<force>${thread.force}</force>\n`);
+    res.write(`</thread>\n`);
+    res.write(`</${tagname}>\n`);
   }
   res.write('</channels>\n');
 }
@@ -489,7 +489,7 @@ async function handleWatch({ paths, res }) {
   res.write(`</html>`);
 }
 
-const createWebSocketServer = (port) => {
+function createWebSocketServer(port) {
   const server = net.createServer((socket) => {
     debug('c:connect', socket.localPort, socket.remoteAddress);
     const client = { stream: createClientStream(socket) };
@@ -528,7 +528,7 @@ const createWebSocketServer = (port) => {
   server.listen(port);
   debug('s:listen', port);
   return server;
-};
+}
 
 function createClientStream(socket) {
   const stream = PassThrough({ objectMode: true }).resume();
@@ -569,7 +569,12 @@ function handleThread(socket, client, element) {
   client.thread_stream.pipe(client.stream);
   debug('c:pipe', thread.id, socket.remoteAddress);
   clearInterval(client.counter);
-  client.counter = setInterval(() => writeViewCounter(socket, thread), 10000);
+  const counter_delay = 60;
+  //const counter_delay = 10;
+  client.counter = setInterval(
+    () => writeViewCounter(socket, thread),
+    counter_delay * 1000
+  );
   client.leave = () => writeLeaveThread(socket, thread);
 }
 
@@ -638,6 +643,7 @@ function createThread(thread_id) {
   };
   thread.stream = createTransform(thread);
   thread.stream.resume();
+  thread.stream.setMaxListeners(0);
   const prev_thread_id = thread_id - 86400;
   const prev_thread = threads[prev_thread_id];
   if (prev_thread) {
@@ -723,7 +729,7 @@ function getLive(video) {
     if (lives[video]) return resolve(lives[video]);
     lives[video] = { stream: PassThrough({ objectMode: true }).resume() };
     (async () => {
-      const retry = 3;
+      const retry = 10;
       for (let i = 0; i < retry; i++) {
         const live = await watchLive(video);
         if (!live) break;
@@ -733,7 +739,7 @@ function getLive(video) {
         stream.pipe(lives[video].stream);
         await promise;
         stream.unpipe(lives[video].stream).resume();
-        await waitSeconds(10);
+        await waitSeconds(3);
       }
       delete lives[video];
       debug('delete', video);
@@ -773,7 +779,7 @@ async function promiseWatchLive(url, embedded_data, stream) {
   const { room, ws } = await createWebSocket(ws_url);
   const mws = createMessageWebSocket(room, revisionCheckIntervalMs);
   mws.on('message', (data) => {
-    debug(data);
+    //debug(data);
     const message = JSON.parse(data);
     //debug('mws:message', mws._socket.remoteAddress, message);
     const { chat } = message;
@@ -796,11 +802,12 @@ async function promiseWatchLive(url, embedded_data, stream) {
 }
 
 function createThreads() {
-  for (const channel of Object.values(channels)) {
+  const exclude_radio = true;
+  const filter = exclude_radio ? (channel) => !channel.radiko_id : () => true;
+  for (const channel of Object.values(channels).filter(filter)) {
     const thread_id = getBaseTime() + channel.thread_id;
     threads[thread_id] = createThread(thread_id);
   }
-  setTimeout(() => createThreads(), getNextBaseTimeDelay() * 1000);
 }
 
 async function setPipesInterval() {
@@ -855,11 +862,23 @@ function isPiped(src, dest) {
   return src._readableState.pipes.includes(dest);
 }
 
-(async function () {
-  createThreads();
-  await setPipesInterval();
-  setForceInterval();
-  createHttpServer();
-  createWebSocketServer(ms_port);
-})()
+function closeServer(server) {
+  return new Promise((resolve) => server.close(resolve));
+}
+
+(async () => {
+  const http_server = createHttpServer();
+  const ws_server = createWebSocketServer(ms_port);
+  const restart = false;
+  do {
+    createThreads();
+    await waitSeconds(getNextBaseTimeDelay());
+  } while (restart);
+  closeServer(http_server);
+  await closeServer(ws_server);
+  process.exit();
+})();
+
+setForceInterval();
+setPipesInterval();
 
