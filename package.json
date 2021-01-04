@@ -6,9 +6,15 @@
   "dependencies": {
     "ws": "^7.4.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "pkg": "^4.4.9"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pkg": "pkg ."
+  },
+  "bin": {
+    "namami": "index.js"
   },
   "repository": {
     "type": "git",
