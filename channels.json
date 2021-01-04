@@ -376,7 +376,7 @@
     "thread_id": 65,
     "bs": true,
     "name": "TwellV",
-    "tags": ["TwellV"]
+    "tags": ["TwellV", "BS12"]
   },
   "jk231": {
     "thread_id": 66,
@@ -387,7 +387,7 @@
     "thread_id": 67,
     "bs": true,
     "name": "BSグリーンチャンネル",
-    "tags": ["グリーンチャンネル"]
+    "tags": ["BSグリーンチャンネル", "グリーンチャンネル"]
   },
   "jk236": {
     "thread_id": 68,
