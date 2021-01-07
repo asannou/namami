@@ -1,32 +1,7 @@
 RewriteEngine On
 RewriteCond %{QUERY_STRING} ^(.+)$
 RewriteRule ^(.+)$ $1\%3F%1?
+RewriteRule ^$ /tv
 RewriteRule ^api/v2/(.+)$ /api/v2_app/$1 [L]
 
-<Files getapplicationversion>
-  ForceType "application/xml; charset=UTF-8"
-</Files>
-<Files session.create>
-  ForceType "application/xml; charset=UTF-8"
-</Files>
-<Files session.destroy>
-  ForceType "application/xml; charset=UTF-8"
-</Files>
-<Files ng.client>
-  ForceType "application/xml; charset=UTF-8"
-</Files>
-<Files ng.owner>
-  ForceType "application/xml; charset=UTF-8"
-</Files>
-<Files getchannels>
-  ForceType "application/xml; charset=UTF-8"
-</Files>
-<Files getflv>
-  ForceType "text/html; charset=UTF-8"
-</Files>
-<Files getpostkey>
-  ForceType "text/plain; charset=UTF-8"
-</Files>
-<Files getwaybackkey>
-  ForceType "text/plain; charset=UTF-8"
-</Files>
+ForceType "text/html; charset=UTF-8"

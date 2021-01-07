@@ -1,3 +1,6 @@
+http://127.0.0.1:8000/tv
+http://127.0.0.1:8000/radio
+http://127.0.0.1:8000/bs
 http://127.0.0.1:8000/api/v2_app/getapplicationversion
 http://127.0.0.1:8000/api/v2_app/session.create
 http://127.0.0.1:8000/api/v2_app/session.destroy

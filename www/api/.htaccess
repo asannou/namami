@@ -1,0 +1,11 @@
+ForceType "application/xml; charset=UTF-8"
+
+<FilesMatch "^getflv\?">
+  ForceType "text/html; charset=UTF-8"
+</FilesMatch>
+<Files getpostkey>
+  ForceType "text/plain; charset=UTF-8"
+</Files>
+<Files getwaybackkey>
+  ForceType "text/plain; charset=UTF-8"
+</Files>
