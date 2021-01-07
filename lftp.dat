@@ -1,0 +1,4 @@
+open -u namami,password namami.sakura.ne.jp
+mirror -R --delete www www
+close
+quit
