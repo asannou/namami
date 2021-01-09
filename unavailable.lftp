@@ -1,0 +1,5 @@
+source .lftp
+open namami.sakura.ne.jp
+put /dev/null -o www/unavailable
+close
+quit

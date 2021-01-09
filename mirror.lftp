@@ -1,0 +1,5 @@
+source .lftp
+open namami.sakura.ne.jp
+mirror --reverse --delete --parallel=20 www www
+close
+quit

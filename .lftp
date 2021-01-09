@@ -1,10 +1,7 @@
+set net:max-retries 1
 set ftp:ssl-auth TLS
 set ftp:ssl-force true
 set ftp:ssl-allow yes
 set ftp:ssl-protect-list yes
 set ftp:ssl-protect-data yes
 set ftp:ssl-protect-fxp yes
-open -u namami,password namami.sakura.ne.jp
-mirror --reverse --delete --parallel=20 www www
-close
-quit
