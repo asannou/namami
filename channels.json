@@ -339,17 +339,20 @@
   "jk191": {
     "thread_id": 58,
     "bs": true,
-    "name": "WOWOWプライム"
+    "name": "WOWOWプライム",
+    "tags": ["WOWOW_PRIME"]
   },
   "jk192": {
     "thread_id": 59,
     "bs": true,
-    "name": "WOWOWライブ"
+    "name": "WOWOWライブ",
+    "tags": ["WOWOW_LIVE"]
   },
   "jk193": {
     "thread_id": 60,
     "bs": true,
-    "name": "WOWOWシネマ"
+    "name": "WOWOWシネマ",
+    "tags": ["WOWOW_CINEMA"]
   },
   "jk200": {
     "thread_id": 61,
@@ -449,9 +452,16 @@
     "bs": true,
     "name": "Dlife"
   },
-  "jk910": {
+    "jk333": {
     "thread_id": 80,
+    "bs": true,
+    "name": "AT-X",
+    "tags": ["AT-X"]
+  },
+  "jk910": {
+    "thread_id": 81,
     "bs": true,
     "name": "SOLiVE24"
   }
 }
+
