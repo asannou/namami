@@ -42,12 +42,14 @@
   "jk10": {
     "thread_id": 8,
     "name": "テレ玉",
-    "tags": ["テレ玉"]
+    "tags": ["テレ玉"],
+    "communities": ["co5253063"]
   },
   "jk11": {
     "thread_id": 9,
     "name": "tvk",
-    "tags": ["tvk"]
+    "tags": ["tvk"],
+    "communities": ["co5215296"]
   },
   "jk12": {
     "thread_id": 10,
@@ -298,61 +300,71 @@
     "thread_id": 51,
     "bs": true,
     "name": "NHKBS-1",
-    "tags": ["NHKBS-1"]
+    "tags": ["NHKBS-1"],
+    "communities": ["co5214081"]
   },
   "jk103": {
     "thread_id": 52,
     "bs": true,
     "name": "NHK BSプレミアム",
-    "tags": ["NHK_BSプレミアム", "NHKBSプレミアム", "BSプレミアム"]
+    "tags": ["NHK_BSプレミアム", "NHKBSプレミアム", "BSプレミアム"],
+    "communities": ["co5175227"]
   },
   "jk141": {
     "thread_id": 53,
     "bs": true,
     "name": "BS 日テレ",
-    "tags": ["BS_日テレ", "BS日テレ"]
+    "tags": ["BS_日テレ", "BS日テレ"],
+    "communities": ["co5175341"]
   },
   "jk151": {
     "thread_id": 54,
     "bs": true,
     "name": "BS 朝日",
-    "tags": ["BS_朝日", "BS朝日"]
+    "tags": ["BS_朝日", "BS朝日"],
+    "communities": ["co5175345"]
   },
   "jk161": {
     "thread_id": 55,
     "bs": true,
     "name": "BS-TBS",
-    "tags": ["BS-TBS", "BSTBS"]
+    "tags": ["BS-TBS", "BSTBS"],
+    "communities": ["co5176119"]
   },
   "jk171": {
     "thread_id": 56,
     "bs": true,
     "name": "BSジャパン",
-    "tags": ["BSジャパン", "BSテレ東"]
+    "tags": ["BSジャパン", "BSテレ東"],
+    "communities": ["co5176122"]
   },
   "jk181": {
     "thread_id": 57,
     "bs": true,
     "name": "BSフジ",
-    "tags": ["BSフジ"]
+    "tags": ["BSフジ"],
+    "communities": ["co5176125"]
   },
   "jk191": {
     "thread_id": 58,
     "bs": true,
     "name": "WOWOWプライム",
-    "tags": ["WOWOW_PRIME"]
+    "tags": ["WOWOW_PRIME"],
+    "communities": ["co5251972"]
   },
   "jk192": {
     "thread_id": 59,
     "bs": true,
     "name": "WOWOWライブ",
-    "tags": ["WOWOW_LIVE"]
+    "tags": ["WOWOW_LIVE"],
+    "communities": ["co5251976"]
   },
   "jk193": {
     "thread_id": 60,
     "bs": true,
     "name": "WOWOWシネマ",
-    "tags": ["WOWOW_CINEMA"]
+    "tags": ["WOWOW_CINEMA"],
+    "communities": ["co5251983"]
   },
   "jk200": {
     "thread_id": 61,
@@ -379,7 +391,8 @@
     "thread_id": 65,
     "bs": true,
     "name": "TwellV",
-    "tags": ["TwellV", "BS12"]
+    "tags": ["TwellV", "BS12"],
+    "communities": ["co5193029"]
   },
   "jk231": {
     "thread_id": 66,
@@ -390,7 +403,8 @@
     "thread_id": 67,
     "bs": true,
     "name": "BSグリーンチャンネル",
-    "tags": ["BSグリーンチャンネル", "グリーンチャンネル"]
+    "tags": ["BSグリーンチャンネル", "グリーンチャンネル"],
+    "communities": ["co5217651"]
   },
   "jk236": {
     "thread_id": 68,
@@ -452,11 +466,12 @@
     "bs": true,
     "name": "Dlife"
   },
-    "jk333": {
+  "jk333": {
     "thread_id": 80,
     "bs": true,
     "name": "AT-X",
-    "tags": ["AT-X"]
+    "tags": ["AT-X"],
+    "communities": ["co5245469"]
   },
   "jk910": {
     "thread_id": 81,

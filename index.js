@@ -733,8 +733,9 @@ function getLive(video) {
       for (let i = 0; i < retry; i++) {
         const live = await watchLive(video);
         if (!live) break;
-        const { tags, stream, promise } = live;
+        const { tags, community, stream, promise } = live;
         lives[video].tags = tags;
+        lives[video].community = community;
         resolve(lives[video]);
         stream.pipe(lives[video].stream);
         await promise;
@@ -752,7 +753,7 @@ async function watchLive(video) {
   const url = `https://live2.nicovideo.jp/watch/${video}`;
   const embedded_data = await getEmbeddedData(url);
   if (!embedded_data) return;
-  const { program: { tag, status } } = embedded_data;
+  const { program: { tag, status }, community } = embedded_data;
   const watchable = new Set(['RELEASED', 'ON_AIR']);
   if (!watchable.has(status)) return;
   //const tags = tag.list.filter((t) => t.isLocked).map((t) => t.text);
@@ -760,7 +761,7 @@ async function watchLive(video) {
   debug('watch', video, tags);
   const stream = PassThrough({ objectMode: true }).resume();
   const promise = promiseWatchLive(url, embedded_data, stream);
-  return { tags, stream, promise };
+  return { tags, community, stream, promise };
 }
 
 async function promiseWatchLive(url, embedded_data, stream) {
@@ -838,12 +839,14 @@ async function pipeLives(tags, videos) {
   }
 }
 
-async function pipeLive(live_video, videos) {
-  const { tags, stream } = await getLive(live_video);
-  const threads = videos ?
-    videos.map((video) => getThread(video)) :
-    tags.map((tag) => getThreadByTag(tag));
-  for (const thread of threads.filter(Boolean)) {
+async function pipeLive(live_video, videos = []) {
+  const { tags, community, stream } = await getLive(live_video);
+  const threads = new Set();
+  videos.forEach((video) => threads.add(getThread(video)));
+  tags.forEach((tag) => threads.add(getThreadByTag(tag)));
+  if (community) threads.add(getThreadByCommunity(community));
+  for (const thread of threads) {
+    if (!thread) continue;
     if (!isPiped(stream, thread.stream)) {
       stream.pipe(thread.stream);
       debug('pipe', live_video, thread.id);
@@ -853,8 +856,15 @@ async function pipeLive(live_video, videos) {
 }
 
 function getThreadByTag(tag) {
-  const video = tag.startsWith('jk') ? tag :
-    Object.keys(channels).find((key) => channels[key].tags?.includes(tag));
+  if (tag.startsWith('jk')) return getThread(tag);
+  const finder = (key) => channels[key].tags?.includes(tag);
+  const video = Object.keys(channels).find(finder);
+  return getThread(video);
+}
+
+function getThreadByCommunity(community) {
+  const finder = (key) => channels[key].communities?.includes(community.id);
+  const video = Object.keys(channels).find(finder);
   return getThread(video);
 }
 
