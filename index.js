@@ -877,13 +877,15 @@ function closeServer(server) {
 }
 
 (async () => {
+  createThreads();
   const http_server = createHttpServer();
   const ws_server = createWebSocketServer(ms_port);
+  await waitSeconds(getNextBaseTimeDelay());
   const restart = false;
-  do {
+  while (restart) {
     createThreads();
     await waitSeconds(getNextBaseTimeDelay());
-  } while (restart);
+  }
   closeServer(http_server);
   await closeServer(ws_server);
   process.exit();
