@@ -750,7 +750,7 @@ function getLive(video) {
 }
 
 async function watchLive(video) {
-  const url = `https://live2.nicovideo.jp/watch/${video}`;
+  const url = `https://live.nicovideo.jp/watch/${video}`;
   const embedded_data = await getEmbeddedData(url);
   if (!embedded_data) return;
   const { program: { tag, status }, community } = embedded_data;
