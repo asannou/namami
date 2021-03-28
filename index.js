@@ -15,6 +15,7 @@ const port = process.argv[3] ?? 80;
 const ms_port = 2525;
 const ms_address = process.argv[2] ?? '127.0.0.1'
 const http_port = port;
+const force_delay = 20;
 
 const lives = {};
 const threads = {};
@@ -635,7 +636,7 @@ function createThread(thread_id) {
     resultcode: 0,
     id: thread_id,
     last_res: 0,
-    last_min_res: 0,
+    last_min_res: Array(60 / force_delay).fill(0),
     recent_res: Array(recent_length),
     ticket: '0x25252525',
     revision: 1,
@@ -824,16 +825,15 @@ async function setPipesInterval() {
 }
 
 function setForceInterval() {
-  const delay = 60;
   return setInterval(() => {
     for (const video of Object.keys(channels)) {
       const thread = getThread(video);
       if (thread) {
-        thread.force = thread.last_res - thread.last_min_res;
-        thread.last_min_res = thread.last_res;
+        thread.force = thread.last_res - thread.last_min_res.shift();
+        thread.last_min_res.push(thread.last_res);
       }
     }
-  }, delay * 1000);
+  }, force_delay * 1000);
 }
 
 async function pipeLives(tags, videos) {
