@@ -300,8 +300,7 @@
     "thread_id": 51,
     "bs": true,
     "name": "NHKBS-1",
-    "tags": ["NHKBS-1"],
-    "communities": ["co5214081"]
+    "tags": ["NHK_BS1", "NHKBS-1"]
   },
   "jk103": {
     "thread_id": 52,
