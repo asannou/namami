@@ -655,8 +655,8 @@ function createThread(thread_id) {
     start_time: base_time,
     end_time: base_time,
     force: 0,
-    viewers: 0,
-    comments: 0,
+    viewers: -1,
+    comments: -1,
     lives: new Set()
   };
   thread.stream = createTransform(thread);
