@@ -448,7 +448,8 @@
   "jk252": {
     "thread_id": 76,
     "bs": true,
-    "name": "IMAGICA BS"
+    "name": "IMAGICA BS",
+    "communities": ["co5683458"]
   },
   "jk255": {
     "thread_id": 77,
@@ -465,15 +466,33 @@
     "bs": true,
     "name": "Dlife"
   },
-  "jk333": {
+  "jk260": {
     "thread_id": 80,
+    "bs": true,
+    "name": "BS松竹東急",
+    "communities": ["co5682554"]
+  },
+  "jk263": {
+    "thread_id": 81,
+    "bs": true,
+    "name": "BSJapanext",
+    "communities": ["co5682551"]
+  },
+  "jk265": {
+    "thread_id": 82,
+    "bs": true,
+    "name": "BSよしもと",
+    "communities": ["co5682548"]
+  },
+  "jk333": {
+    "thread_id": 83,
     "bs": true,
     "name": "AT-X",
     "tags": ["AT-X"],
     "communities": ["co5245469"]
   },
   "jk910": {
-    "thread_id": 81,
+    "thread_id": 84,
     "bs": true,
     "name": "SOLiVE24"
   }
