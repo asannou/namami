@@ -98,7 +98,7 @@ async function getEmbeddedData(url) {
   }
 }
 
-function createWebSocket(webSocketUrl) {
+function createWebSocket(webSocketUrl, video) {
   return new Promise((resolve, reject) => {
     const ws = new WebSocket(
       webSocketUrl,
@@ -136,6 +136,14 @@ function createWebSocket(webSocketUrl) {
           break;
         }
         case 'statistics': {
+          for (const thread of Object.values(threads)) {
+            for (const live of thread.lives) {
+              if (live === video) {
+                thread.viewers = message.data.viewers;
+                thread.comments = message.data.comments;
+              }
+            }
+          }
           break;
         }
       }
@@ -308,6 +316,8 @@ function handleGetChannels({ res }) {
     res.write(`<id>${thread.id}</id>\n`);
     res.write(`<last_res>${escapeChat(last_res)}</last_res>\n`);
     res.write(`<force>${thread.force}</force>\n`);
+    res.write(`<viewers>${thread.viewers}</viewers>\n`);
+    res.write(`<comments>${thread.comments}</comments>\n`);
     res.write(`</thread>\n`);
     res.write(`</${tagname}>\n`);
   }
@@ -645,6 +655,8 @@ function createThread(thread_id) {
     start_time: base_time,
     end_time: base_time,
     force: 0,
+    viewers: -1,
+    comments: -1,
     lives: new Set()
   };
   thread.stream = createTransform(thread);
@@ -766,11 +778,11 @@ async function watchLive(video) {
   const tags = tag.list.map((t) => t.text);
   debug('watch', video, tags);
   const stream = PassThrough({ objectMode: true }).resume();
-  const promise = promiseWatchLive(url, embedded_data, stream);
+  const promise = promiseWatchLive(url, video, embedded_data, stream);
   return { tags, community, stream, promise };
 }
 
-async function promiseWatchLive(url, embedded_data, stream) {
+async function promiseWatchLive(url, video, embedded_data, stream) {
   const {
     site: { relive: { webSocketUrl }, tag: { revisionCheckIntervalMs } },
     program: { beginTime, vposBaseTime },
@@ -783,7 +795,7 @@ async function promiseWatchLive(url, embedded_data, stream) {
   }
   const ws_url = webSocketUrl || await getWebSocketUrl();
   if (!ws_url) return;
-  const { room, ws } = await createWebSocket(ws_url);
+  const { room, ws } = await createWebSocket(ws_url, video);
   const mws = createMessageWebSocket(room, revisionCheckIntervalMs);
   mws.on('message', (data) => {
     //debug(data);
