@@ -78,13 +78,8 @@ async function searchLives(tags, status) {
     isTagSearch: 'true',
     keyword: tags.join(' ')
   });
-  const res = await httpGet(url);
-  const data = await slurpMessage(res);
-  const re = new RegExp(
-    '<a class="searchPage-ProgramList_ThumbnailLink" href="watch/([^"]+)">\n' +
-    '\\s*<div class="searchPage-ProgramList_StatusLabel-(live|future)">', 'g'
-  );
-  return Array.from(data.matchAll(re)).map((m) => m[1]);
+  const { searchResult: { programs } } = await getEmbeddedData(url);
+  return programs[status].map((program) => program.id);
 }
 
 async function getEmbeddedData(url) {
@@ -212,7 +207,7 @@ function createMessageWebSocket(room, revisionCheckIntervalMs) {
     clearInterval(interval);
   });
   mws.on('error', (error) => {
-    debug('mws:error', mws._socket.remoteAddress);
+    debug('mws:error', mws._socket?.remoteAddress);
     throw error;
   });
   return mws;
